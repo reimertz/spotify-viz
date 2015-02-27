@@ -2,6 +2,8 @@
 
 ## Installation
 npm install
+bower install
 
-## Run it
-gulp
+## Run
+
+gulp serve
