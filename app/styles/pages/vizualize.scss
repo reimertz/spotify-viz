@@ -1,122 +1,151 @@
-.vizualize-view {
-  .top {
-    margin-top: 100px;
-    color: black;
-  }
+@mixin graph($userColor, $challengerColor, $leftBarColor, $rightBarColor) {
+    background: linear-gradient(to right, $userColor 0%, $userColor 49.5%, $challengerColor 50%, $challengerColor 100%);
 
+    .left-bar {
+        background: $leftBarColor;
+      }
+
+    .right-bar {
+      background: $rightBarColor;
+    }
+}
+
+
+
+
+
+.vizualize-view {
   .md-primary {
     padding: 10px 65px;
   }
 
-  #ready{
+  h1,h2, h3,h4 {
+    text-align: center;
+  }
+
+  img {
+    border-radius: 100px;
+    width: 25vw;
+    max-width: 200px;
+  }
+  .transparent-bg {
+    background: black !important;
+  }
+
+  .ready{
     background-image: url("../images/splash.jpg");
     background-size: cover;
   }
 
-  h1,h2 {
-    text-align: center;
+  .images {
+    background: black;
+    div {
+      text-align: center;
+    }
+
+    img {
+      border-radius: 100px;
+      width: 25vw;
+      max-width: 200px;
+    }
+
+  }
+
+  .user .rest{
+    background: transparent !important;
+  }
+  .challenger .rest{
+    background: transparent;
+  }
+
+  .hipster {
+    $userColor : darken(red, 18);
+    $challengerColor : darken($userColor, 10);
+    $leftBarColor : lighten(orange,15);
+    $rightBarColor : darken(orange, 10);
+
+    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+  }
+
+  .superstar {
+    $userColor : darken(orange, 18);
+    $challengerColor : darken($userColor, 10);
+    $leftBarColor : lighten(red,15);
+    $rightBarColor : darken(red, 10);
+
+    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+  }
+
+  .giver {
+    $userColor : darken(pink, 18);
+    $challengerColor : darken($userColor, 10);
+    $leftBarColor : lighten(blue,15);
+    $rightBarColor : darken(blue, 10);
+
+    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+  }
+
+  .collaborator {
+    $userColor : darken(green, 5);
+    $challengerColor : darken($userColor, 10);
+    $leftBarColor : lighten(blue,15);
+    $rightBarColor : darken(blue, 10);
+
+    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+  }
+
+  .hoarder {
+    $userColor : darken(tomato, 10);
+    $challengerColor : darken($userColor, 15);
+    $leftBarColor : lighten(brown,20);
+    $rightBarColor : darken(brown, 10);
+
+    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
   }
 
 
-  #hipster {
-    background: red;
-    &.user-won .user,
-    &.challenger-won .challenger  {
-      .won {
-        background: red;
-      }
-    }
-    .won {
-      background: darken(red, 20);
-    }
-    .rest{
-        background: black;
-      }
-  }
-  #superstar {
-    background: orange;
-    &.user-won .user,
-    &.challenger-won .challenger  {
-      .won {
-        background: orange;
-      }
-    }
-    .won {
-      background: darken(orange, 20);
-    }
-    .rest{
-        background: red;
-      }
-  }
-  #giver {
-    background: pink;
-    &.user-won .user,
-    &.challenger-won .challenger  {
-      .won {
-        background: pink;
-      }
-    }
-    .won {
-      background: darken(pink, 20);
-    }
-    .rest{
-        background: orange;
-      }
+  .trendsetter {
+    color: white;
+    $userColor : darken(black, 10);
+    $challengerColor : lighten($userColor, 15);
+    $leftBarColor : lighten(brown,20);
+    $rightBarColor : darken(brown, 10);
+
+    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
   }
 
-  #collaborator {
-    background: green;
-    &.user-won .user,
-    &.challenger-won .challenger  {
-      .won {
-        background: green;
-      }
-    }
-    .won {
-      background: darken(green, 12);
-    }
-    .rest{
-        background: pink;
-      }
+
+  .copycat {
+    $userColor : darken(tomato, 10);
+    $challengerColor : darken($userColor, 15);
+    $leftBarColor : lighten(brown,20);
+    $rightBarColor : darken(brown, 10);
+
+    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+
+  }
+  #world {
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    display: inline;
   }
 
-  #hoarder {
-    background: tomato;
-    &.user-won .user,
-    &.challenger-won .challenger  {
-      .won {
-        background: tomato;
-      }
+  .summary {
+    background: black;
+
+    &.user-won .challenger .right-bar {
+      background: transparent !important;
     }
-    .won {
-      background: darken(tomato, 12);
+    &.challenger-won .user .left-bar {
+      background: transparent !important;
     }
-    .rest{
-        background: green;
-      }
   }
-  #share {
+
+  .share {
     background: black;
   }
-
-  .user-won .user,
-  .challenger-won .challenger  {
-    .rest{
-      background: rgba(0,0,0,0.2);
-    }
-
-  }
-
-  .user,
-  .challenger  {
-    .won{
-      background: rgba(0,0,0,0.5);
-    }
-    .rest{
-      background: rgba(0,0,0,0.2);
-    }
-
-  }
-
 }
+
 

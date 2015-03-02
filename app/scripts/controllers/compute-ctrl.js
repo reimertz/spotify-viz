@@ -59,24 +59,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
         delete $scope.user.playlists;
         delete $scope.challenger.playlists;
 
-        // //hipster
-        // var  ($scope.user.popularity + $scope.user.popularity)
-        // var hipster = {
-
-        // }
-
-        // 100
-        // //superstar
-        // //giver
-        // //collabirator
-        // //hoarder
-        // 10
-        // 5
-        // 15
-
-
-
-
         $state.go('vizualize', {'user': $scope.user, 'challenger': $scope.challenger});
       })
     });
@@ -103,15 +85,15 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     var promises = [];
 
     promises.push(delay(0).then(function(){return Spotify.getUserPlaylists(id, {offset: 0})}));
-    promises.push(delay(400).then(function(){return Spotify.getUserPlaylists(id, {offset: 25})}));
-    promises.push(delay(800).then(function(){return Spotify.getUserPlaylists(id, {offset: 50})}));
-    promises.push(delay(1200).then(function(){return Spotify.getUserPlaylists(id, {offset: 75})}));
-    promises.push(delay(1600).then(function(){return Spotify.getUserPlaylists(id, {offset: 100})}));
-    promises.push(delay(1800).then(function(){return Spotify.getUserPlaylists(id, {offset: 100})}));
-    promises.push(delay(2200).then(function(){return Spotify.getUserPlaylists(id, {offset: 125})}));
-    promises.push(delay(2600).then(function(){return Spotify.getUserPlaylists(id, {offset: 150})}));
-    promises.push(delay(3200).then(function(){return Spotify.getUserPlaylists(id, {offset: 175})}));
-    promises.push(delay(3600).then(function(){return Spotify.getUserPlaylists(id, {offset: 200})}));
+    promises.push(delay(200).then(function(){return Spotify.getUserPlaylists(id, {offset: 25})}));
+    promises.push(delay(400).then(function(){return Spotify.getUserPlaylists(id, {offset: 50})}));
+    promises.push(delay(600).then(function(){return Spotify.getUserPlaylists(id, {offset: 75})}));
+    promises.push(delay(800).then(function(){return Spotify.getUserPlaylists(id, {offset: 100})}));
+    promises.push(delay(1000).then(function(){return Spotify.getUserPlaylists(id, {offset: 100})}));
+    promises.push(delay(1200).then(function(){return Spotify.getUserPlaylists(id, {offset: 125})}));
+    promises.push(delay(1400).then(function(){return Spotify.getUserPlaylists(id, {offset: 150})}));
+    promises.push(delay(1800).then(function(){return Spotify.getUserPlaylists(id, {offset: 175})}));
+    promises.push(delay(2000).then(function(){return Spotify.getUserPlaylists(id, {offset: 200})}));
 
 
     return $q.allSettled(promises).then(function(results){
@@ -133,13 +115,15 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     var totalPublics = 0;
     var totalPlaylistFollowers = 0;
 
+    var totalOtherPlaylistFollowers = 0;
     var totalOtherPlaylists = 0;
+    var totalOtherSongs = 0;
 
     playlists.forEach(function(playlist, index){
 
-      totalSongs += playlist.tracks.total;
 
       if(playlist.owner.id == userId){
+        totalSongs += playlist.tracks.total;
         totalCollaboratives += playlist.collaborative ? 1 : 0;
         totalPublics += playlist.public ? 1 : 0;
 
@@ -148,6 +132,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
       }
       else {
         totalOtherPlaylists += 1;
+        totalOtherSongs += playlist.tracks.total;
       }
     });
 
@@ -156,7 +141,13 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
       results.forEach(function (result) {
         if (result.state === "fulfilled") {
             fullPlaylists.push(result.value);
+
+          if(result.value.owner.id == userId){
             totalPlaylistFollowers += result.value.followers.total;
+          }
+          else {
+            totalOtherPlaylistFollowers += result.value.followers.total;
+          }
         }
       });
 
@@ -166,7 +157,10 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
         totalCollaboratives: totalCollaboratives,
         totalPublics: totalPublics,
         totalPlaylistFollowers: totalPlaylistFollowers,
-        totalOtherPlaylists: totalOtherPlaylists
+
+        totalOtherPlaylistFollowers: totalOtherPlaylistFollowers,
+        totalOtherPlaylists: totalOtherPlaylists,
+        totalOtherSongs: totalOtherSongs
       }
     });
   }
