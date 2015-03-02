@@ -11,72 +11,72 @@ angular.module('controllers.vizualize', [])
   'Spotify',
   '$mdToast',
 function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
-  // if(!$stateParams.user || !$stateParams.challenger){
-  //   return $state.go('main');
-  // }
-  // $scope.user = $stateParams.user;
-  // $scope.challenger = $stateParams.challenger;
+  if(!$stateParams.user || !$stateParams.challenger){
+    return $state.go('main');
+  }
+  $scope.user = $stateParams.user;
+  $scope.challenger = $stateParams.challenger;
 
-  $scope.user = {
-    "display_name": "Piérre Reimertz",
-    "external_urls": {
-      "spotify": "https://open.spotify.com/user/pierrereimertz"
-    },
-    "followers": {
-      "href": null,
-      "total": 17
-    },
-    "href": "https://api.spotify.com/v1/users/pierrereimertz",
-    "id": "pierrereimertz",
-    "images": [
-      {
-        "height": null,
-        "url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/p200x200/10882315_10152468260636372_1455449795985538325_n.jpg?oh=2ae02d7a8bc0583016c639176cef65da&oe=5551C93B&__gda__=1431331244_3a213d8abbe07bc76324ce57ebfac5b6",
-        "width": null
-      }
-    ],
-    "type": "user",
-    "uri": "spotify:user:pierrereimertz",
-    "totalSongs": 882,
-    "totalCollaboratives": 0,
-    "totalPublics": 9,
-    "totalPlaylistFollowers": 15,
-    "totalOtherPlaylistFollowers": 0,
-    "totalOtherPlaylists": 5,
-    "totalOtherSongs": 2534,
-    "popularity": 19,
-    "wins": 2,
-    "image": "//fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/p200x200/10882315_10152468260636372_1455449795985538325_n.jpg?oh=2ae02d7a8bc0583016c639176cef65da&oe=5551C93B&__gda__=1431331244_3a213d8abbe07bc76324ce57ebfac5b6"
-  };
+  // $scope.user = {
+  //   "display_name": "Piérre Reimertz",
+  //   "external_urls": {
+  //     "spotify": "https://open.spotify.com/user/pierrereimertz"
+  //   },
+  //   "followers": {
+  //     "href": null,
+  //     "total": 17
+  //   },
+  //   "href": "https://api.spotify.com/v1/users/pierrereimertz",
+  //   "id": "pierrereimertz",
+  //   "images": [
+  //     {
+  //       "height": null,
+  //       "url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/p200x200/10882315_10152468260636372_1455449795985538325_n.jpg?oh=2ae02d7a8bc0583016c639176cef65da&oe=5551C93B&__gda__=1431331244_3a213d8abbe07bc76324ce57ebfac5b6",
+  //       "width": null
+  //     }
+  //   ],
+  //   "type": "user",
+  //   "uri": "spotify:user:pierrereimertz",
+  //   "totalSongs": 882,
+  //   "totalCollaboratives": 0,
+  //   "totalPublics": 9,
+  //   "totalPlaylistFollowers": 15,
+  //   "totalOtherPlaylistFollowers": 0,
+  //   "totalOtherPlaylists": 5,
+  //   "totalOtherSongs": 2534,
+  //   "popularity": 19,
+  //   "wins": 2,
+  //   "image": "//fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/p200x200/10882315_10152468260636372_1455449795985538325_n.jpg?oh=2ae02d7a8bc0583016c639176cef65da&oe=5551C93B&__gda__=1431331244_3a213d8abbe07bc76324ce57ebfac5b6"
+  // };
 
-  $scope.challenger ={
-    "display_name": null,
-    "external_urls": {
-      "spotify": "https://open.spotify.com/user/whimsical.edt"
-    },
-    "followers": {
-      "href": null,
-      "total": 1
-    },
-    "href": "https://api.spotify.com/v1/users/whimsical.edt",
-    "id": "whimsical.edt",
-    "images": [],
-    "type": "user",
-    "uri": "spotify:user:whimsical.edt",
-    "IsFollowingUser": [
-      false
-    ],
-    "totalSongs": 824,
-    "totalCollaboratives": 0,
-    "totalPublics": 24,
-    "totalPlaylistFollowers": 2,
-    "totalOtherPlaylistFollowers": 0,
-    "totalOtherPlaylists": 19,
-    "totalOtherSongs": 6932,
-    "popularity": 26,
-    "wins": 3,
-    "image": "../images/challenger.svg"
-  };
+  // $scope.challenger ={
+  //   "display_name": null,
+  //   "external_urls": {
+  //     "spotify": "https://open.spotify.com/user/whimsical.edt"
+  //   },
+  //   "followers": {
+  //     "href": null,
+  //     "total": 1
+  //   },
+  //   "href": "https://api.spotify.com/v1/users/whimsical.edt",
+  //   "id": "whimsical.edt",
+  //   "images": [],
+  //   "type": "user",
+  //   "uri": "spotify:user:whimsical.edt",
+  //   "IsFollowingUser": [
+  //     false
+  //   ],
+  //   "totalSongs": 824,
+  //   "totalCollaboratives": 0,
+  //   "totalPublics": 24,
+  //   "totalPlaylistFollowers": 2,
+  //   "totalOtherPlaylistFollowers": 0,
+  //   "totalOtherPlaylists": 19,
+  //   "totalOtherSongs": 6932,
+  //   "popularity": 26,
+  //   "wins": 3,
+  //   "image": "../images/challenger.svg"
+  // };
 
   $scope.user.wins = 0;
   $scope.challenger.wins = 0;
