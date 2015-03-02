@@ -1,0 +1,122 @@
+.vizualize-view {
+  .top {
+    margin-top: 100px;
+    color: black;
+  }
+
+  .md-primary {
+    padding: 10px 65px;
+  }
+
+  #ready{
+    background-image: url("../images/splash.jpg");
+    background-size: cover;
+  }
+
+  h1,h2 {
+    text-align: center;
+  }
+
+
+  #hipster {
+    background: red;
+    &.user-won .user,
+    &.challenger-won .challenger  {
+      .won {
+        background: red;
+      }
+    }
+    .won {
+      background: darken(red, 20);
+    }
+    .rest{
+        background: black;
+      }
+  }
+  #superstar {
+    background: orange;
+    &.user-won .user,
+    &.challenger-won .challenger  {
+      .won {
+        background: orange;
+      }
+    }
+    .won {
+      background: darken(orange, 20);
+    }
+    .rest{
+        background: red;
+      }
+  }
+  #giver {
+    background: pink;
+    &.user-won .user,
+    &.challenger-won .challenger  {
+      .won {
+        background: pink;
+      }
+    }
+    .won {
+      background: darken(pink, 20);
+    }
+    .rest{
+        background: orange;
+      }
+  }
+
+  #collaborator {
+    background: green;
+    &.user-won .user,
+    &.challenger-won .challenger  {
+      .won {
+        background: green;
+      }
+    }
+    .won {
+      background: darken(green, 12);
+    }
+    .rest{
+        background: pink;
+      }
+  }
+
+  #hoarder {
+    background: tomato;
+    &.user-won .user,
+    &.challenger-won .challenger  {
+      .won {
+        background: tomato;
+      }
+    }
+    .won {
+      background: darken(tomato, 12);
+    }
+    .rest{
+        background: green;
+      }
+  }
+  #share {
+    background: black;
+  }
+
+  .user-won .user,
+  .challenger-won .challenger  {
+    .rest{
+      background: rgba(0,0,0,0.2);
+    }
+
+  }
+
+  .user,
+  .challenger  {
+    .won{
+      background: rgba(0,0,0,0.5);
+    }
+    .rest{
+      background: rgba(0,0,0,0.2);
+    }
+
+  }
+
+}
+

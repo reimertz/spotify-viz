@@ -10,7 +10,9 @@
     "angular-touch": "1.3.x",
     "angular-sanitize": "1.3.x",
     "angular-ui-router": "0.2.x",
-    "bootstrap-sass-official": "3.2.x"
+    "bootstrap-sass-official": "3.2.x",
+    "angular-spotify": "~0.11.0",
+    "angular-material": "master"
   },
   "devDependencies": {
     "angular-mocks": "1.3.x"

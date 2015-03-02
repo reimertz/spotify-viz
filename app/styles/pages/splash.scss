@@ -1,0 +1,15 @@
+.splash-view {
+  transition: opacity 1s;
+  background-image: url("../images/splash.jpg");
+  background-size: cover;
+
+
+  .top {
+    margin-top: 100px;
+    color: white;
+  }
+
+  .md-primary {
+    padding: 10px 65px;
+  }
+}
