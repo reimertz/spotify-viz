@@ -9,8 +9,8 @@ angular.module('controllers.compute', [])
   '$q',
   '$timeout',
   'Spotify',
-  '$mdToast',
-function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
+  '$mdDialog',
+function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
   if(!$stateParams.user || !$stateParams.challenger){
     return $state.go('main');
   }
@@ -20,17 +20,37 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   $scope.user.playlists = [];
   $scope.challenger.playlists = [];
 
-  $scope.status = 'Fetching User data..';
+  $scope.status = 'Fetching Playlists..';
+
+  $scope.showAlert = function(type) {
+    var message = (type == 'user')
+    ? 'It seems that you don\'t have any playlists.. Add some playlists and try again!'
+    : 'It seems that your friend doesn\'t have any playlists.. Try with someone else!';
+
+    var confirm = $mdDialog.confirm({clickOutsideToClose: false})
+      .title('We couldn\'t any playlists!')
+      .content(message)
+      .ariaLabel('Lucky day')
+      .ok('Got it!');
+
+    $mdDialog.show(confirm).then(function() {
+      return $state.go('main');
+    });
+  }
 
 
   $q.all([getUserPlaylists($scope.user.id), getUserPlaylists($scope.challenger.id)]).then(function(result){
-    $scope.status = 'Fetching Playlists..';
+    var promises = [];
 
     $scope.user.playlists = result[0];
     $scope.challenger.playlists = result[1];
 
-  }).then(function(){
-    var promises = [];
+    if($scope.user.playlists.length == 0) {
+      return $scope.showAlert('user');
+    }
+    else if ($scope.challenger.playlists.length == 0 ) {
+      return $scope.showAlert('challenger');
+    };
 
     $scope.status = 'Analyzing Playlist data...';
 
@@ -38,16 +58,12 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     promises.push(getAllPlaylistData($scope.challenger.id, $scope.challenger.playlists));
 
     $q.all(promises).then(function(result){
-      var promises = [];
-
       $scope.status = 'Analyzing popularity data..';
 
       angular.extend($scope.user, $scope.user, result[0]);
       angular.extend($scope.challenger, $scope.challenger, result[1]);
 
-      promises.push(calculatePopularity($scope.user.playlists));
-      promises.push(calculatePopularity($scope.challenger.playlists));
-      $q.all(promises).then(function(result){
+      $q.all([calculatePopularity($scope.user.playlists),calculatePopularity($scope.challenger.playlists)]).then(function(result){
         $scope.status = 'Finalizing data...';
 
         $scope.user.popularity = (result[0]/$scope.user.totalSongs).toFixed(2);
@@ -71,9 +87,11 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     playlists.forEach(function(playlist, index){
       playlist.tracks.items.map(function(item){
         totalPopularity += item.track.popularity;
+        console.log(totalPopularity);
       })
 
       if(playlists.length-1 == index){
+        console.log('deferred');
         deferred.resolve(totalPopularity);
       }
     });

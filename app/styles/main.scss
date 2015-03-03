@@ -16,6 +16,12 @@
   height: 100%;
 }
 
+.md-dialog-container {
+  color: black;
+  -webkit-animation: animation 865ms linear both;
+  animation: animation 865ms linear both;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;

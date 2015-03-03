@@ -14,69 +14,9 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   if(!$stateParams.user || !$stateParams.challenger){
     return $state.go('main');
   }
+
   $scope.user = $stateParams.user;
   $scope.challenger = $stateParams.challenger;
-
-  // $scope.user = {
-  //   "display_name": "Piérre Reimertz",
-  //   "external_urls": {
-  //     "spotify": "https://open.spotify.com/user/pierrereimertz"
-  //   },
-  //   "followers": {
-  //     "href": null,
-  //     "total": 17
-  //   },
-  //   "href": "https://api.spotify.com/v1/users/pierrereimertz",
-  //   "id": "pierrereimertz",
-  //   "images": [
-  //     {
-  //       "height": null,
-  //       "url": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/p200x200/10882315_10152468260636372_1455449795985538325_n.jpg?oh=2ae02d7a8bc0583016c639176cef65da&oe=5551C93B&__gda__=1431331244_3a213d8abbe07bc76324ce57ebfac5b6",
-  //       "width": null
-  //     }
-  //   ],
-  //   "type": "user",
-  //   "uri": "spotify:user:pierrereimertz",
-  //   "totalSongs": 882,
-  //   "totalCollaboratives": 0,
-  //   "totalPublics": 9,
-  //   "totalPlaylistFollowers": 15,
-  //   "totalOtherPlaylistFollowers": 0,
-  //   "totalOtherPlaylists": 5,
-  //   "totalOtherSongs": 2534,
-  //   "popularity": 19,
-  //   "wins": 2,
-  //   "image": "//fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/p200x200/10882315_10152468260636372_1455449795985538325_n.jpg?oh=2ae02d7a8bc0583016c639176cef65da&oe=5551C93B&__gda__=1431331244_3a213d8abbe07bc76324ce57ebfac5b6"
-  // };
-
-  // $scope.challenger ={
-  //   "display_name": null,
-  //   "external_urls": {
-  //     "spotify": "https://open.spotify.com/user/whimsical.edt"
-  //   },
-  //   "followers": {
-  //     "href": null,
-  //     "total": 1
-  //   },
-  //   "href": "https://api.spotify.com/v1/users/whimsical.edt",
-  //   "id": "whimsical.edt",
-  //   "images": [],
-  //   "type": "user",
-  //   "uri": "spotify:user:whimsical.edt",
-  //   "IsFollowingUser": [
-  //     false
-  //   ],
-  //   "totalSongs": 824,
-  //   "totalCollaboratives": 0,
-  //   "totalPublics": 24,
-  //   "totalPlaylistFollowers": 2,
-  //   "totalOtherPlaylistFollowers": 0,
-  //   "totalOtherPlaylists": 19,
-  //   "totalOtherSongs": 6932,
-  //   "popularity": 26,
-  //   "wins": 3,
-  //   "image": "../images/challenger.svg"
-  // };
 
   $scope.user.wins = 0;
   $scope.challenger.wins = 0;
@@ -118,7 +58,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.lostHipsterName = $scope.lostHipster.name;
 
     $scope.wonHipster.wins +=1;
-    //$scope.lostHipster.wins.push[-1];
 
     $scope.userHipsterPercentage = ($scope.user.popularity / ($scope.user.popularity + $scope.challenger.popularity)) * 100;
     $scope.challengerHipsterPercentage = ($scope.challenger.popularity / ($scope.user.popularity + $scope.challenger.popularity)) * 100;
@@ -132,7 +71,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
     $scope.superstarClass = ($scope.user.followers.total > $scope.challenger.followers.total) ? "user" : "challenger";
 
-
     $scope.wonSuperstar =  $scope[$scope.superstarClass];
     $scope.wonSuperstarName = $scope.wonSuperstar.name;
 
@@ -140,7 +78,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.lostSuperstarName = $scope.lostSuperstar.name;
 
     $scope.wonSuperstar.wins +=1;
-    //$scope.lostSuperstar.wins.push[-1];
 
     $scope.userSuperstarPercentage = ($scope.user.followers.total / ($scope.user.followers.total + $scope.challenger.followers.total)) * 100;
     $scope.challengerSuperstarPercentage = ($scope.challenger.followers.total / ($scope.user.followers.total + $scope.challenger.followers.total)) * 100;
@@ -151,9 +88,8 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
 
   function calculateGiverValues(){
+
     $scope.giverClass = ($scope.user.totalPublics > $scope.challenger.totalPublics) ? "user" : "challenger";
-
-
 
     $scope.wonGiver =  $scope[$scope.giverClass];
     $scope.wonGiverName = $scope.wonGiver.name;
@@ -162,7 +98,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.lostGiverName = $scope.lostGiver.name;
 
     $scope.wonGiver.wins +=1;
-    //$scope.lostGiver.wins.push[-1];
 
     $scope.userGiverPercentage = ($scope.user.totalPublics / ($scope.user.totalPublics + $scope.challenger.totalPublics)) * 100;
     $scope.challengerGiverPercentage = ($scope.challenger.totalPublics / ($scope.user.totalPublics + $scope.challenger.totalPublics)) * 100;
@@ -176,14 +111,13 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.collaboratorClass = ($scope.user.totalCollaboratives > $scope.challenger.totalCollaboratives) ? "user" : "challenger";
 
 
-    $scope.wonCollaborator =  $scope[$scope.collaboratorClass];
-    $scope.wonCollaboratorName = $scope.wonCollaborator.name;
+    $scope.wonCollaborator = $scope[$scope.collaboratorClass];
+    $scope.wonCollaboratorName = $scope.wonCollaborator.name || false;
 
     $scope.lostCollaborator = ($scope.wonCollaborator === $scope.user) ?   $scope.challenger :  $scope.user;
     $scope.lostCollaboratorName = $scope.lostCollaborator.name;
 
     $scope.wonCollaborator.wins +=1;
-    //$scope.lostCollaborator.wins.push[-1];
 
     $scope.userCollaboratorPercentage = ($scope.user.totalCollaboratives / ($scope.user.totalCollaboratives + $scope.challenger.totalCollaboratives)) * 100;
     $scope.challengerCollaboratorPercentage = ($scope.challenger.totalCollaboratives / ($scope.user.totalCollaboratives + $scope.challenger.totalCollaboratives)) * 100;
@@ -196,7 +130,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   function calculateHoarderValues(){
     $scope.hoarderClass = ($scope.user.totalSongs > $scope.challenger.totalSongs) ? "user" : "challenger";
 
-
     $scope.wonHoarder =  $scope[$scope.hoarderClass];
     $scope.wonHoarderName = $scope.wonHoarder.name;
 
@@ -204,7 +137,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.lostHoarderName = $scope.lostHoarder.name;
 
     $scope.wonHoarder.wins +=1;
-    //$scope.lostHoarder.wins.push[-1];
 
     $scope.userHoarderPercentage = ($scope.user.totalSongs / ($scope.user.totalSongs + $scope.challenger.totalSongs)) * 100;
     $scope.challengerHoarderPercentage = ($scope.challenger.totalSongs / ($scope.user.totalSongs + $scope.challenger.totalSongs)) * 100;
@@ -223,8 +155,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.lostTrendsetterName = $scope.lostTrendsetter.name;
 
     $scope.wonTrendsetter.wins +=1;
-    //$scope.lostTrendsetter.wins.push[-1];
-
 
     $scope.userTrendsetterPercentage = ($scope.user.totalPlaylistFollowers / ($scope.user.totalPlaylistFollowers + $scope.challenger.totalPlaylistFollowers)) * 100;
     $scope.challengerTrendsetterPercentage = ($scope.challenger.totalPlaylistFollowers / ($scope.user.totalPlaylistFollowers + $scope.challenger.totalPlaylistFollowers)) * 100;
@@ -234,7 +164,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   }
 
   function calculateCopycatValues(){
-    $scope.copycatClass = ($scope.user.totalPlaylistFollowers < $scope.challenger.totalPlaylistFollowers) ? "user" : "challenger";
+    $scope.copycatClass = ($scope.user.totalOtherPlaylistFollowers < $scope.challenger.totalOtherPlaylistFollowers) ? "user" : "challenger";
 
     $scope.wonCopycat =  $scope[$scope.copycatClass];
     $scope.wonCopycatName = $scope.wonCopycat.name;
@@ -243,7 +173,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.lostCopycatName = $scope.lostCopycat.name;
 
     $scope.wonCopycat.wins +=1;
-    //$scope.lostCopycat.wins.push[-1];
 
     $scope.userCopycatPercentage = ($scope.user.totalOtherPlaylists / ($scope.user.totalOtherPlaylists + $scope.challenger.totalOtherPlaylists)) * 100;
     $scope.challengerCopycatPercentage = ($scope.challenger.totalOtherPlaylists / ($scope.user.totalOtherPlaylists + $scope.challenger.totalOtherPlaylists)) * 100;
@@ -255,7 +184,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
     function calculateSummaryValues(){
       $scope.summaryClass = ($scope.user.wins > $scope.challenger.wins) ? "user" : "challenger";
-      $scope.wonSummaryName = $scope[$scope.summaryClass].name;
+      $scope.wonSummary =  $scope[$scope.summaryClass];
     }
 
 

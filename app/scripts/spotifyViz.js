@@ -18,8 +18,8 @@ angular.module('spotifyViz', [
   .config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, SpotifyProvider) {
 
   SpotifyProvider.setClientId('835d8a553e434b99b9f2314d3fe6d90d');
-  //SpotifyProvider.setRedirectUri('http://localhost:3000/callback.html');
-  SpotifyProvider.setRedirectUri('https://reimertz.github.io/spotify-viz/callback.html');
+  SpotifyProvider.setRedirectUri('http://localhost:3000/callback.html');
+  //SpotifyProvider.setRedirectUri('https://reimertz.github.io/spotify-viz/callback.html');
   SpotifyProvider.setScope('playlist-read-private user-follow-read user-library-read');
 
   $mdThemingProvider.theme('default')

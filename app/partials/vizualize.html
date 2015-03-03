@@ -28,7 +28,8 @@
     <img class="swosh" ng-src="{{challenger.image}}">
   </div>
   <div class="hipster" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1>{{wonHipsterName || "No one"}} is the The Hipster</h1>
+    <h1 ng-if="wonHipsterName">{{wonHipsterName}} is the The Hipster</h1>
+    <h1 ng-if="!wonHipsterName">"It's a draw!"</h1>
   </div>
   <div class="hipster" layout="column" class="swosh" layout-align="start center" flex="10">
     <h3><i>"a person who follows the latest trends and fashions, especially those regarded as being outside the cultural mainstream."</i></h3>
@@ -55,7 +56,8 @@
     <img class="swosh" ng-src="{{challenger.image}}">
   </div>
   <div class="superstar" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1>{{wonSuperstarName || "No one"}} is the The Superstar</h1>
+    <h1 ng-if="wonSuperstarName">{{wonSuperstarName}} is the The Superstar</h1>
+    <h1 ng-if="!wonSuperstarName">"It's a draw!"</h1>
   </div>
   <div class="superstar" layout="column" class="swosh" layout-align="start center" flex="10">
     <h3><i>""</i></h3>
@@ -84,7 +86,8 @@
     <img class="swosh" ng-src="{{challenger.image}}">
   </div>
   <div class="giver" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1>{{wonGiverName || "No one"}} is the The Giver</h1>
+    <h1 ng-if="wonGiverName">{{wonGiverName}} is the The Giver</h1>
+    <h1 ng-if="!wonGiverName">"It's a draw!"</h1>
   </div>
   <div class="giver" layout="column" class="swosh" layout-align="start center" flex="10">
     <h3><i>""</i></h3>
@@ -111,7 +114,8 @@
     <img class="swosh" ng-src="{{challenger.image}}">
   </div>
   <div class="collaborator" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1>{{won.CollaboratorName || "No one"}} is the The Collaborator</h1>
+    <h1 ng-if="wonCollaboratorName">{{wonCollaboratorName}} is the The Collaborator"}}</h1>
+    <h1 ng-if="!wonCollaboratorName">It's a draw!</h1>
   </div>
   <div class="collaborator" layout="column" class="swosh" layout-align="start center" flex="10">
     <h3><i>""</i></h3>
@@ -138,7 +142,8 @@
     <img class="swosh" ng-src="{{challenger.image}}">
   </div>
   <div class="hoarder" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1>{{wonHoarderName || "No one"}} is the The Hoarder</h1>
+    <h1 ng-if="wonHoarderName">{{wonHoarderName}} is the The Hoarder</h1>
+    <h1 ng-if="!wonHoarderName">"It's a draw!"</h1>
   </div>
   <div class="hoarder" layout="column" class="swosh" layout-align="start center" flex="10">
     <h3><i>""</i></h3>
@@ -165,7 +170,8 @@
     <img class="swosh" ng-src="{{challenger.image}}">
   </div>
   <div class="trendsetter" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1>{{wonTrendsetterName || "No one"}} is the The Trendsetter</h1>
+    <h1 ng-if="wonTrendsetterName">{{wonTrendsetterName}} is the The Trendsetter</h1>
+    <h1 ng-if="!wonTrendsetterName">"It's a draw!"</h1>
   </div>
   <div class="trendsetter" layout="column" class="swosh" layout-align="start center" flex="10">
     <h3><i>""</i></h3>
@@ -192,7 +198,8 @@
     <img class="swosh" ng-src="{{challenger.image}}">
   </div>
   <div class="copycat" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1>{{wonCopycatName || "No one"}} is the The Copycat</h1>
+    <h1 ng-if="wonCopycatName">{{wonCopycatName}} is the The Copycat</h1>
+    <h1 ng-if="!wonCopycatName">"It's a draw!"</h1>
   </div>
   <div class="copycat" layout="column" class="swosh" layout-align="start center" flex="10">
     <h3><i>""</i></h3>
@@ -217,10 +224,11 @@
   <!-- Summary -->
   <div class="summary" layout="column"  flex="5"></div>
   <div class="summary" layout="column" class="swosh" layout-align="center center" flex="25">
-    <img class="swosh" ng-src="{{challenger.image}}">
+    <img class="swosh" ng-src="{{wonSummary.image || challenger.image}}">
   </div>
   <div class="summary" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1>{{wonSummaryName || "No one"}} the is Winner!</h1>
+    <h1 ng-if="wonSummary">{{wonSummary.name}} is the Winner!</h1>
+    <h1 ng-if="!wonSummary">"It's a draw!"</h1>
   </div>
   <div layout="row" class="hipster summary {{hipsterClass}}-won" flex="5">
     <div layout="row" flex="50" class="user">
@@ -303,7 +311,7 @@
     </div>
   </div>
   <div class="summary" layout="column" class="swosh" layout-align="start center" flex="20">
-    <h4>{{wonSummaryName}} won in {{user.wins}} categories and are therefore the allmight winner!</h4>
+    <h4>{{wonSummary.name}} won in {{wonSummary.wins}} categories and are therefore the allmight winner!</h4>
   </div>
 
 
