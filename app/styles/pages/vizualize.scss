@@ -59,46 +59,46 @@
   }
 
   .hipster {
-    $userColor : darken(red, 18);
-    $challengerColor : darken($userColor, 10);
-    $leftBarColor : lighten(orange,15);
-    $rightBarColor : darken(orange, 10);
+    $userColor : rgb(172, 75, 149);
+    $challengerColor : rgb(165, 60, 140);
+    $leftBarColor : rgb(132, 19, 105);
+    $rightBarColor : rgb(110, 16, 88);
 
     @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
   }
 
   .superstar {
-    $userColor : darken(orange, 18);
-    $challengerColor : darken($userColor, 10);
-    $leftBarColor : lighten(red,15);
-    $rightBarColor : darken(red, 10);
+    $userColor : rgb(250, 108, 94);
+    $challengerColor : rgb(250, 96, 80);
+    $leftBarColor : rgb(212, 54, 38);
+    $rightBarColor : rgb(174, 45, 31);
 
     @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
   }
 
   .giver {
-    $userColor : darken(pink, 18);
-    $challengerColor : darken($userColor, 10);
-    $leftBarColor : lighten(blue,15);
-    $rightBarColor : darken(blue, 10);
+    $userColor : rgb(61, 177, 165);
+    $challengerColor : rgb(45, 170, 158);
+    $leftBarColor : rgb(2, 137, 124);
+    $rightBarColor : rgb(2, 122, 110);
 
     @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
   }
 
   .collaborator {
-    $userColor : darken(green, 5);
-    $challengerColor : darken($userColor, 10);
-    $leftBarColor : lighten(blue,15);
-    $rightBarColor : darken(blue, 10);
+    $userColor : rgb(255, 161, 59);
+    $challengerColor : rgb(255, 154, 43);
+    $leftBarColor : rgb(242, 126, 0);
+    $rightBarColor : rgb(217, 113, 0);
 
     @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
   }
 
   .hoarder {
-    $userColor : darken(tomato, 10);
-    $challengerColor : darken($userColor, 15);
-    $leftBarColor : lighten(brown,20);
-    $rightBarColor : darken(brown, 10);
+    $userColor : rgb(98, 210, 89);
+    $challengerColor : rgb(85, 206, 75);
+    $leftBarColor : rgb(46, 176, 350);
+    $rightBarColor : rgb(41, 157, 31);
 
     @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
   }
@@ -106,20 +106,20 @@
 
   .trendsetter {
     color: white;
-    $userColor : darken(black, 10);
-    $challengerColor : lighten($userColor, 15);
-    $leftBarColor : lighten(brown,20);
-    $rightBarColor : darken(brown, 10);
+    $userColor : rgb(225, 81, 134);
+    $challengerColor : rgb(223, 67, 124);
+    $leftBarColor : rgb(184, 25, 83);
+    $rightBarColor : rgb(151, 20, 68);
 
     @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
   }
 
 
   .copycat {
-    $userColor : darken(tomato, 10);
-    $challengerColor : darken($userColor, 15);
-    $leftBarColor : lighten(brown,20);
-    $rightBarColor : darken(brown, 10);
+    $userColor : rgb(59, 158, 220);
+    $challengerColor : rgb(43, 150, 217);
+    $leftBarColor : rgb(0, 116, 188);
+    $rightBarColor : rgb(0, 97, 157);
 
     @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
 
