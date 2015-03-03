@@ -24,11 +24,11 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
 
   $scope.showAlert = function(type) {
     var message = (type == 'user')
-    ? 'It seems that you don\'t have any playlists.. Add some playlists and try again!'
-    : 'It seems that your friend doesn\'t have any playlists.. Try with someone else!';
+    ? 'It seems that you don\'t have any public playlists.. So you lost before it has even begun!'
+    : 'It seems that your friend doesn\'t have any public playlists.. Try with someone else!';
 
     var confirm = $mdDialog.confirm({clickOutsideToClose: false})
-      .title('We couldn\'t any playlists!')
+      .title('We couldn\'t find any playlists!')
       .content(message)
       .ariaLabel('Lucky day')
       .ok('Got it!');
@@ -87,11 +87,9 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
     playlists.forEach(function(playlist, index){
       playlist.tracks.items.map(function(item){
         totalPopularity += item.track.popularity;
-        console.log(totalPopularity);
       })
 
       if(playlists.length-1 == index){
-        console.log('deferred');
         deferred.resolve(totalPopularity);
       }
     });

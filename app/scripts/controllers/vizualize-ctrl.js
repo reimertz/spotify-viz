@@ -18,6 +18,9 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   $scope.user = $stateParams.user;
   $scope.challenger = $stateParams.challenger;
 
+  console.log($scope.user);
+  console.log($scope.challenger);
+
   $scope.user.wins = 0;
   $scope.challenger.wins = 0;
 
@@ -78,6 +81,9 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.lostSuperstarName = $scope.lostSuperstar.name;
 
     $scope.wonSuperstar.wins +=1;
+
+    $scope.userSuperstarPercentage = ($scope.user.followers.total / ($scope.user.followers.total + $scope.challenger.followers.total)) * 100;
+    $scope.challengerSuperstarPercentage = ($scope.challenger.followers.total / ($scope.user.followers.total + $scope.challenger.followers.total)) * 100;
 
     $scope.userSuperstarPercentage = ($scope.user.followers.total / ($scope.user.followers.total + $scope.challenger.followers.total)) * 100;
     $scope.challengerSuperstarPercentage = ($scope.challenger.followers.total / ($scope.user.followers.total + $scope.challenger.followers.total)) * 100;
@@ -190,7 +196,9 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
 
   function mEGo(integer){
-    return ((integer % 5) > 2.5) ? integer - (integer % 5) + 5 : integer - (integer % 5);
+    return ((integer % 5) >= 2.5)
+    ? integer - (integer % 5) + 5
+    : integer - (integer % 5);
   }
 
   $scope.again = function () {
@@ -308,6 +316,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   };
 
   step();
+  resizeWindow();
 
 
 

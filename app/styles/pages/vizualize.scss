@@ -8,6 +8,14 @@
     .right-bar {
       background: $rightBarColor;
     }
+
+    &.summary .left-bar {
+      background: $userColor;
+    }
+
+    &.summary .right-bar {
+      background: $challengerColor;
+    }
 }
 
 
@@ -22,7 +30,6 @@
   h1,h2, h3,h4 {
     text-align: center;
   }
-
   img {
     border-radius: 100px;
     width: 25vw;
@@ -51,12 +58,25 @@
 
   }
 
-  .user .rest{
-    background: transparent !important;
+  .user{
+     .rest{
+        background: transparent !important;
+    }
+    .left-bar{
+      min-width: 40px;
+    }
   }
-  .challenger .rest{
-    background: transparent;
+  .challenger {
+    .rest{
+      background: transparent;
+    }
+    .right-bar{
+      min-width: 40px;
+    }
   }
+
+
+
 
   .hipster {
     $userColor : rgb(172, 75, 149);
@@ -97,7 +117,7 @@
   .hoarder {
     $userColor : rgb(98, 210, 89);
     $challengerColor : rgb(85, 206, 75);
-    $leftBarColor : rgb(46, 176, 350);
+    $leftBarColor : rgb(46, 176, 35);
     $rightBarColor : rgb(41, 157, 31);
 
     @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
@@ -144,7 +164,7 @@
   }
 
   .share {
-    background: black;
+    background: tomato;
   }
 }
 

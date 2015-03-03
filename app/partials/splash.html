@@ -3,8 +3,45 @@
     <h1>Spotify Working Title App</h1>
   </md-toolbar>
 
-  <div layout="column" class="swosh" layout-align="center center" flex="50">
-    <h2>Sign in with Spotify to compare your</h2>
+  <div layout="row" class="swosh" layout-align="center center" flex="30">
+    <ul ng-switch on="currentMessage%4">
+      <li class="animate-switch" ng-switch-when="0">
+        <h1>Who are The Hipster? </h1>
+      <li class="animate-switch" ng-switch-when="1">
+        <h1>Who is The Superstar?</h1>
+      </li>
+      <li class="animate-switch" ng-switch-when="2">
+        <h1>Who is The Giver?</h1>
+      </li>
+      <li class="animate-switch" ng-switch-when="3">
+        <h1>Who is The Collaborator?</h1>
+      </li>
+      <li class="animate-switch" ng-switch-when="3">
+        <h1>Who is The Hoarder?</h1>
+      </li>
+      <li class="animate-switch" ng-switch-when="3">
+      <h1>Who is The Trendsetter?</h1>
+      </li>
+      <li class="animate-switch" ng-switch-when="3">
+        <h1>Who is The Copy Cat?</h1>
+      </li>
+    </ul>
+
+
+
+
+
+
+
+
+  </div>
+
+  <div layout="column" class="swosh" layout-align="center center" flex="20">
+    <h1>Login with your Spotify profile to find out!</h1>
     <md-button class="md-raised md-primary" ng-click="login()">Login to Spotify</md-button>
   </div>
+  <div layout="row" class="swosh" layout-align="center center" flex="20">
+
+  </div>
+
 </div>

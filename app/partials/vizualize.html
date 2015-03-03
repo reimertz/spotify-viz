@@ -25,7 +25,7 @@
 
   <div class="hipster" layout="column"  flex="5"></div>
   <div class="hipster" layout="column" class="swosh" layout-align="center center" flex="25">
-    <img class="swosh" ng-src="{{challenger.image}}">
+    <img class="swosh" ng-src="{{wonHipster.image}}">
   </div>
   <div class="hipster" layout="column" class="swosh" layout-align="start center" flex="10">
     <h1 ng-if="wonHipsterName">{{wonHipsterName}} is the The Hipster</h1>
@@ -41,7 +41,7 @@
       <div flex="{{userHipsterPercentage}}" class="left-bar"><h1>{{user.popularity}}</h1></div>
     </div>
     <div layout="row" flex="50" class="challenger">
-      <div flex="{{challengerHipsterPercentage}}" class="won"><h1>{{challenger.popularity}}</h1></div>
+      <div flex="{{challengerHipsterPercentage}}" class="right-bar"><h1>{{challenger.popularity}}</h1></div>
       <div flex="{{userHipsterPercentage}}" class="rest"></div>
     </div>
   </div>
@@ -49,11 +49,11 @@
     <h4>{{wonHipsterName}} had the average of {{wonHipster.popularity}} and beat {{lostHipsterName}} who had an average of {{lostHipster.popularity}}.</h4>
   </div>
 
-  <!-- Superstart -->
+  <!-- Superstart-->
 
   <div class="superstar" layout="column"  flex="5"></div>
   <div class="superstar" layout="column" class="swosh" layout-align="center center" flex="25">
-    <img class="swosh" ng-src="{{challenger.image}}">
+    <img class="swosh" ng-src="{{wonSuperstar.image}}">
   </div>
   <div class="superstar" layout="column" class="swosh" layout-align="start center" flex="10">
     <h1 ng-if="wonSuperstarName">{{wonSuperstarName}} is the The Superstar</h1>
@@ -83,7 +83,7 @@
   <!-- Giver -->
   <div class="giver" layout="column"  flex="5"></div>
   <div class="giver" layout="column" class="swosh" layout-align="center center" flex="25">
-    <img class="swosh" ng-src="{{challenger.image}}">
+    <img class="swosh" ng-src="{{wonGiver.image}}">
   </div>
   <div class="giver" layout="column" class="swosh" layout-align="start center" flex="10">
     <h1 ng-if="wonGiverName">{{wonGiverName}} is the The Giver</h1>
@@ -111,10 +111,10 @@
   <!-- Collaborator -->
   <div class="collaborator" layout="column"  flex="5"></div>
   <div class="collaborator" layout="column" class="swosh" layout-align="center center" flex="25">
-    <img class="swosh" ng-src="{{challenger.image}}">
+    <img class="swosh" ng-src="{{wonCollaborator.image}}">
   </div>
   <div class="collaborator" layout="column" class="swosh" layout-align="start center" flex="10">
-    <h1 ng-if="wonCollaboratorName">{{wonCollaboratorName}} is the The Collaborator"}}</h1>
+    <h1 ng-if="wonCollaboratorName">{{wonCollaboratorName}} is the The Collaborator</h1>
     <h1 ng-if="!wonCollaboratorName">It's a draw!</h1>
   </div>
   <div class="collaborator" layout="column" class="swosh" layout-align="start center" flex="10">
@@ -139,7 +139,7 @@
   <!-- Hoarder -->
   <div class="hoarder" layout="column"  flex="5"></div>
   <div class="hoarder" layout="column" class="swosh" layout-align="center center" flex="25">
-    <img class="swosh" ng-src="{{challenger.image}}">
+    <img class="swosh" ng-src="{{wonHoarder.image}}">
   </div>
   <div class="hoarder" layout="column" class="swosh" layout-align="start center" flex="10">
     <h1 ng-if="wonHoarderName">{{wonHoarderName}} is the The Hoarder</h1>
@@ -167,7 +167,7 @@
   <!-- Trendsetter -->
   <div class="trendsetter" layout="column"  flex="5"></div>
   <div class="trendsetter" layout="column" class="swosh" layout-align="center center" flex="25">
-    <img class="swosh" ng-src="{{challenger.image}}">
+    <img class="swosh" ng-src="{{wonTrendsetter.image}}">
   </div>
   <div class="trendsetter" layout="column" class="swosh" layout-align="start center" flex="10">
     <h1 ng-if="wonTrendsetterName">{{wonTrendsetterName}} is the The Trendsetter</h1>
@@ -195,7 +195,7 @@
   <!-- Copy Cat -->
   <div class="copycat" layout="column"  flex="5"></div>
   <div class="copycat" layout="column" class="swosh" layout-align="center center" flex="25">
-    <img class="swosh" ng-src="{{challenger.image}}">
+    <img class="swosh" ng-src="{{wonCopycat.image}}">
   </div>
   <div class="copycat" layout="column" class="swosh" layout-align="start center" flex="10">
     <h1 ng-if="wonCopycatName">{{wonCopycatName}} is the The Copycat</h1>
@@ -231,87 +231,101 @@
     <h1 ng-if="!wonSummary">"It's a draw!"</h1>
   </div>
   <div layout="row" class="hipster summary {{hipsterClass}}-won" flex="5">
-    <div layout="row" flex="50" class="user">
+    <div layout="row" flex="25"></div>
+    <div layout="row" flex="25" class="user">
       <div flex="{{challengerHipsterPercentage}}" class="rest"></div>
       <div flex="{{userHipsterPercentage}}" class="left-bar"></div>
     </div>
-    <div layout="row" flex="50" class="challenger">
+    <div layout="row" flex="25" class="challenger">
       <div flex="{{challengerHipsterPercentage}}" class="won"></div>
       <div flex="{{userHipsterPercentage}}" class="rest"></div>
     </div>
+    <div layout="row" flex="25"></div>
   </div>
   <div layout="row" class="superstar summary {{superstarClass}}-won" flex="5">
-    <div layout="row" flex="50" class="user">
+    <div layout="row" flex="25"></div>
+    <div layout="row" flex="25" class="user">
       <div flex="{{challengerSuperstarPercentage}}" class="rest"></div>
       <div flex="{{userSuperstarPercentage}}" class="left-bar"></div>
     </div>
-    <div layout="row" flex="50" class="challenger">
+    <div layout="row" flex="25" class="challenger">
       <div flex="{{challengerSuperstarPercentage}}" class="right-bar"></div>
       <div flex="{{userSuperstarPercentage}}" class="rest"></div>
     </div>
+    <div layout="row" flex="25"></div>
   </div>
   <div layout="row" class="giver summary {{giverClass}}-won" flex="5">
-    <div layout="row" flex="50" class="user">
+    <div layout="row" flex="25"></div>
+    <div layout="row" flex="25" class="user">
       <div flex="{{challengerGiverPercentage}}" class="rest"></div>
       <div flex="{{userGiverPercentage}}" class="left-bar"></div>
     </div>
-    <div layout="row" flex="50" class="challenger">
+    <div layout="row" flex="25" class="challenger">
       <div flex="{{challengerGiverPercentage}}" class="right-bar"></div>
       <div flex="{{userGiverPercentage}}" class="rest"></div>
     </div>
+    <div layout="row" flex="25"></div>
   </div>
   <div layout="row" class="collaborator summary {{collaboratorClass}}-won" flex="5">
-    <div layout="row" flex="50" class="user">
+    <div layout="row" flex="25"></div>
+    <div layout="row" flex="25" class="user">
       <div flex="{{challenger.CollaboratorPercentage}}" class="rest"></div>
       <div flex="{{user.CollaboratorPercentage}}" class="left-bar"></div>
     </div>
-    <div layout="row" flex="50" class="challenger">
+    <div layout="row" flex="25" class="challenger">
       <div flex="{{challenger.CollaboratorPercentage}}" class="right-bar"></div>
       <div flex="{{user.CollaboratorPercentage}}" class="rest"></div>
     </div>
+    <div layout="row" flex="25"></div>
   </div>
   <div layout="row" class="hoarder summary {{hoarderClass}}-won" flex="5">
-    <div layout="row" flex="50" class="user">
+    <div layout="row" flex="25"></div>
+    <div layout="row" flex="25" class="user">
       <div flex="{{challengerHoarderPercentage}}" class="rest"></div>
       <div flex="{{userHoarderPercentage}}" class="left-bar"></div>
     </div>
-    <div layout="row" flex="50" class="challenger">
+    <div layout="row" flex="25" class="challenger">
       <div flex="{{challengerHoarderPercentage}}" class="right-bar"></div>
       <div flex="{{userHoarderPercentage}}" class="rest"></div>
     </div>
+    <div layout="row" flex="25"></div>
   </div>
   <div layout="row" class="trendsetter summary {{trendsetterClass}}-won" flex="5">
-    <div layout="row" flex="50" class="user">
+    <div layout="row" flex="25"></div>
+    <div layout="row" flex="25" class="user">
       <div flex="{{challengerTrendsetterPercentage}}" class="rest"></div>
       <div flex="{{userTrendsetterPercentage}}" class="left-bar"></div>
     </div>
-    <div layout="row" flex="50" class="challenger">
+    <div layout="row" flex="25" class="challenger">
       <div flex="{{challengerTrendsetterPercentage}}" class="right-bar"></div>
       <div flex="{{userTrendsetterPercentage}}" class="rest"></div>
     </div>
+    <div layout="row" flex="25"></div>
   </div>
   <div layout="row" class="copycat summary {{copycatClass}}-won" flex="5">
-    <div layout="row" flex="50" class="user">
+    <div layout="row" flex="25"></div>
+    <div layout="row" flex="25" class="user">
       <div flex="{{challengerCopycatPercentage}}" class="rest"></div>
       <div flex="{{userCopycatPercentage}}" class=" left-bar"></div>
     </div>
-    <div layout="row" flex="50" class="challenger">
+    <div layout="row" flex="25" class="challenger">
       <div flex="{{challengerCopycatPercentage}}" class="right-bar"></div>
       <div flex="{{userCopycatPercentage}}" class="rest"></div>
     </div>
+    <div layout="row" flex="25"></div>
   </div>
   <div class="summary" layout="row" class="{{summaryClass}}-won" flex="5">
-    <div layout="row" flex="50" class="user">
+    <div layout="row" flex="25" class="user">
       <div flex="{{challengerSummaryPercentage}}" class="rest"></div>
       <div flex="{{userSummaryPercentage}}" class=" won"><h1>{{user.totalOtherPlaylists}}</h1></div>
     </div>
-    <div layout="row" flex="50" class="challenger">
+    <div layout="row" flex="25" class="challenger">
       <div flex="{{challengerSummaryPercentage}}" class="won"><h1>{{challenger.totalOtherPlaylists}}</h1></div>
       <div flex="{{userSummaryPercentage}}" class="rest"></div>
     </div>
   </div>
   <div class="summary" layout="column" class="swosh" layout-align="start center" flex="20">
-    <h4>{{wonSummary.name}} won in {{wonSummary.wins}} categories and are therefore the allmight winner!</h4>
+    <h4>{{wonSummary.name}} won in {{wonSummary.wins}} categories and are therefore the allmighty winner!</h4>
   </div>
 
 
