@@ -366,7 +366,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify) {
   step();
   resizeWindow();
 
-
   $('body').panelSnap({
     panelSelector: '.section',
     slideSpeed: 200,
@@ -375,4 +374,5 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify) {
       wrapAround: false
     }
   });
-}])
+
+}]);
