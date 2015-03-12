@@ -3,30 +3,30 @@
 angular.module('controllers.vizualize', [])
 
 .controller('VizualizeCtrl', [
-  '$scope',
-  '$state',
-  '$stateParams',
-  '$q',
-  '$timeout',
-  'Spotify',
-  '$mdToast',
-function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
-  if(!$stateParams.user || !$stateParams.challenger){
+'$scope',
+'$state',
+'$stateParams',
+'$q',
+'$timeout',
+'Spotify',
+function ($scope, $state, $stateParams, $q, $timeout, Spotify) {
+  if(!$stateParams.user || !$stateParams.challenger || !$stateParams.globalAverages){
     return $state.go('main');
   }
 
   $scope.user = $stateParams.user;
   $scope.challenger = $stateParams.challenger;
-
-  console.log($scope.user);
-  console.log($scope.challenger);
+  $scope.globalAverages = $stateParams.globalAverages;
 
   $scope.user.wins = 0;
   $scope.challenger.wins = 0;
 
-  $scope.user.name = $scope.user.display_name || $scope.user.id;
-  $scope.challenger.name = $scope.challenger.display_name || $scope.challenger.id;
+  $scope.user.name = $scope.user.display_name || $scope.user.id; // jshint ignore:line
+  $scope.challenger.name = $scope.challenger.display_name || $scope.challenger.id; // jshint ignore:line
 
+  console.log($scope.user)
+  console.log($scope.challenger)
+  console.log($scope.globalAverages)
 
   $scope.hide = false;
 
@@ -34,15 +34,16 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   calculateHipsterValues();
   calculateSuperstarValues();
   calculateGiverValues();
-  calculateCollaboratorValues();
+  //calculateCollaboratorValues();
   calculateHoarderValues();
   calculateTrendsetterValues();
   calculateCopycatValues();
   calculateSummaryValues();
+  calculateAverageValues();
 
   function getImages(){
-    $scope.user.image = ($scope.user.images[0]) ? $scope.user.images[0].url.replace('https://', '//') : "../images/user.svg";
-    $scope.challenger.image = ($scope.challenger.images[0]) ? $scope.challenger.images[0].url.replace('https://', '//') : "../images/challenger.svg";
+    $scope.user.image = ($scope.user.images[0]) ? $scope.user.images[0].url.replace('https://', '//') : '../images/category_avatar1.png';
+    $scope.challenger.image = ($scope.challenger.images[0]) ? $scope.challenger.images[0].url.replace('https://', '//') : '../images/category_avatar2.png';
   }
 
   //The Hipster
@@ -52,7 +53,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     $scope.user.popularity = parseInt($scope.user.popularity);
     $scope.challenger.popularity = parseInt($scope.challenger.popularity);
 
-    $scope.hipsterClass = ($scope.user.popularity < $scope.challenger.popularity) ? "user" : "challenger";
+    $scope.hipsterClass = ($scope.user.popularity < $scope.challenger.popularity) ? 'user' : 'challenger';
 
     $scope.wonHipster =  $scope[$scope.hipsterClass];
     $scope.wonHipsterName = $scope.wonHipster.name;
@@ -72,7 +73,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
   function calculateSuperstarValues(){
 
-    $scope.superstarClass = ($scope.user.followers.total > $scope.challenger.followers.total) ? "user" : "challenger";
+    $scope.superstarClass = ($scope.user.followers.total > $scope.challenger.followers.total) ? 'user' : 'challenger';
 
     $scope.wonSuperstar =  $scope[$scope.superstarClass];
     $scope.wonSuperstarName = $scope.wonSuperstar.name;
@@ -95,7 +96,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
   function calculateGiverValues(){
 
-    $scope.giverClass = ($scope.user.totalPublics > $scope.challenger.totalPublics) ? "user" : "challenger";
+    $scope.giverClass = ($scope.user.totalPublics > $scope.challenger.totalPublics) ? 'user' : 'challenger';
 
     $scope.wonGiver =  $scope[$scope.giverClass];
     $scope.wonGiverName = $scope.wonGiver.name;
@@ -113,8 +114,8 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   }
 
   //The Collaborator
-  function calculateCollaboratorValues(){
-    $scope.collaboratorClass = ($scope.user.totalCollaboratives > $scope.challenger.totalCollaboratives) ? "user" : "challenger";
+  /*function calculateCollaboratorValues(){
+    $scope.collaboratorClass = ($scope.user.totalCollaboratives > $scope.challenger.totalCollaboratives) ? 'user' : 'challenger';
 
 
     $scope.wonCollaborator = $scope[$scope.collaboratorClass];
@@ -130,11 +131,11 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
     $scope.userCollaboratorPercentage = mEGo($scope.userCollaboratorPercentage);
     $scope.challengerCollaboratorPercentage = mEGo($scope.challengerCollaboratorPercentage);
-  }
+  }*/
 
 
   function calculateHoarderValues(){
-    $scope.hoarderClass = ($scope.user.totalSongs > $scope.challenger.totalSongs) ? "user" : "challenger";
+    $scope.hoarderClass = ($scope.user.totalSongs > $scope.challenger.totalSongs) ? 'user' : 'challenger';
 
     $scope.wonHoarder =  $scope[$scope.hoarderClass];
     $scope.wonHoarderName = $scope.wonHoarder.name;
@@ -152,7 +153,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   }
 
   function calculateTrendsetterValues(){
-    $scope.trendsetterClass = ($scope.user.totalPlaylistFollowers > $scope.challenger.totalPlaylistFollowers) ? "user" : "challenger";
+    $scope.trendsetterClass = ($scope.user.totalPlaylistFollowers > $scope.challenger.totalPlaylistFollowers) ? 'user' : 'challenger';
 
     $scope.wonTrendsetter =  $scope[$scope.trendsetterClass];
     $scope.wonTrendsetterName = $scope.wonTrendsetter.name;
@@ -170,7 +171,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   }
 
   function calculateCopycatValues(){
-    $scope.copycatClass = ($scope.user.totalOtherPlaylistFollowers < $scope.challenger.totalOtherPlaylistFollowers) ? "user" : "challenger";
+    $scope.copycatClass = ($scope.user.totalOtherPlaylistFollowers < $scope.challenger.totalOtherPlaylistFollowers) ? 'user' : 'challenger';
 
     $scope.wonCopycat =  $scope[$scope.copycatClass];
     $scope.wonCopycatName = $scope.wonCopycat.name;
@@ -189,16 +190,64 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
 
     function calculateSummaryValues(){
-      $scope.summaryClass = ($scope.user.wins > $scope.challenger.wins) ? "user" : "challenger";
+      $scope.summaryClass = ($scope.user.wins > $scope.challenger.wins) ? 'user' : 'challenger';
       $scope.wonSummary =  $scope[$scope.summaryClass];
     }
 
+    function calculateAverageValues(){
+      var userDataArray = [];
+      var globalDataArray = [];
 
+
+      userDataArray.push('You')
+      //hipster
+      userDataArray.push(100*Math.max($scope.user.popularity/$scope.globalAverages.totalPopularityAverage||1, 0).toFixed(2));
+      //superstar
+      userDataArray.push(100*Math.max($scope.user.followers.total/ $scope.globalAverages.totalFollowers||1, 0).toFixed(2));
+
+      userDataArray.push(100*Math.max($scope.user.totalPublics/$scope.globalAverages.totalPublicsAverage||1, 0).toFixed(2));
+
+      //userDataArray.push(100*Math.max($scope.user.totalCollaboratives/$scope.globalAverages.totalCollaborativesAverage||1, 0).toFixed(2));
+
+      userDataArray.push(100*Math.max($scope.user.totalSongs/$scope.globalAverages.totalSongsAverage||1, 0).toFixed(2));
+
+      userDataArray.push(100*Math.max($scope.user.totalOtherPlaylistFollowers/$scope.globalAverages.totalOtherPlaylistFollowersAverage||1, 0).toFixed(2));
+
+      userDataArray.push(100*Math.max($scope.user.totalOtherPlaylists/$scope.globalAverages.totalOtherPlaylistsAverage||1, 0).toFixed(2));
+
+
+      var chart = c3.generate({
+          data: {
+            labels: {
+              format: function (v) { return v + ' %'; },
+            },
+            columns: [userDataArray]
+          },
+          grid: {
+            y: {
+                lines: [{value: 100, text: 'Global Average', class: 'baseline'}]
+            }
+          },
+          tooltip: {
+            show: false
+          },
+          axis: {
+            x: {
+              type: 'category',
+              categories: ['The Hipster','The Superstar','The Giver',/*'The Collaborator',*/'The Hoarder','The Trendsetter','The Copycat']
+            }
+          },
+          legend: {
+            hide: true
+            //or hide: 'data1'
+            //or hide: ['data1', 'data2']
+          }
+      });
+
+    }
 
   function mEGo(integer){
-    return ((integer % 5) >= 2.5)
-    ? integer - (integer % 5) + 5
-    : integer - (integer % 5);
+    return ((integer % 5) >= 2.5) ? integer - (integer % 5) + 5 : integer - (integer % 5);
   }
 
   $scope.again = function () {
@@ -208,15 +257,15 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
   var COLORS, Confetti, NUM_CONFETTI, PI_2, canvas, confetti, context, drawCircle, i, range, resizeWindow, xpos;
 
-  NUM_CONFETTI = 350;
+  NUM_CONFETTI = 200;
 
   COLORS = [[85, 71, 106], [174, 61, 99], [219, 56, 83], [244, 92, 68], [248, 182, 70]];
 
   PI_2 = 2 * Math.PI;
 
-  canvas = document.getElementById("world");
+  canvas = document.getElementById('world');
 
-  context = canvas.getContext("2d");
+  context = canvas.getContext('2d');
 
   window.w = 0;
 
@@ -224,7 +273,6 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
 
   resizeWindow = function() {
     window.w = canvas.width = window.innerWidth;
-    return window.h = canvas.height = window.innerHeight;
   };
 
   window.addEventListener('resize', resizeWindow, false);
@@ -255,7 +303,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   Confetti = (function() {
     function Confetti() {
       this.style = COLORS[~~range(0, 5)];
-      this.rgb = "rgba(" + this.style[0] + "," + this.style[1] + "," + this.style[2];
+      this.rgb = 'rgba(' + this.style[0] + ',' + this.style[1] + ',' + this.style[2];
       this.r = ~~range(2, 6);
       this.r2 = 2 * this.r;
       this.replace();
@@ -269,7 +317,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
       this.xmax = w - this.r;
       this.ymax = h - this.r;
       this.vx = range(0, 2) + 8 * xpos - 5;
-      return this.vy = 0.7 * this.r + range(-1, 1);
+      this.vy = 0.7 * this.r + range(-1, 1)
     };
 
     Confetti.prototype.draw = function() {
@@ -287,7 +335,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
       if (!((0 < (_ref = this.x) && _ref < this.xmax))) {
         this.x = (this.x + this.xmax) % this.xmax;
       }
-      return drawCircle(~~this.x, ~~this.y, this.r, "" + this.rgb + "," + this.opacity + ")");
+      drawCircle(~~this.x, ~~this.y, this.r, '' + this.rgb + ',' + this.opacity + ')');
     };
 
     return Confetti;
@@ -298,7 +346,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
     var _i, _results;
     _results = [];
     for (i = _i = 1; 1 <= NUM_CONFETTI ? _i <= NUM_CONFETTI : _i >= NUM_CONFETTI; i = 1 <= NUM_CONFETTI ? ++_i : --_i) {
-      _results.push(new Confetti);
+      _results.push(new Confetti());
     }
     return _results;
   })();
@@ -319,5 +367,12 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdToast) {
   resizeWindow();
 
 
-
+  $('body').panelSnap({
+    panelSelector: '.section',
+    slideSpeed: 200,
+    keyboardNavigation: {
+      enabled: true,
+      wrapAround: false
+    }
+  });
 }])

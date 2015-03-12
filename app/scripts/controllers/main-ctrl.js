@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 'use strict';
 
 angular.module('controllers.home', [])
@@ -8,8 +9,7 @@ angular.module('controllers.home', [])
   '$q',
   '$timeout',
   'Spotify',
-  '$mdToast',
-function ($scope, $state, $q, $timeout, Spotify, $mdToast) {
+function ($scope, $state, $q, $timeout, Spotify) {
 
   $scope.invalidUser = false;
   $scope.user = {};

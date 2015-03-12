@@ -1,47 +1,35 @@
-<div layout="column" class="splash-view">
-  <md-toolbar layout="row">
-    <h1>Spotify Working Title App</h1>
-  </md-toolbar>
-
-  <div layout="row" class="swosh" layout-align="center center" flex="30">
-    <ul ng-switch on="currentMessage%4">
-      <li class="animate-switch" ng-switch-when="0">
-        <h1>Who are The Hipster? </h1>
-      <li class="animate-switch" ng-switch-when="1">
-        <h1>Who is The Superstar?</h1>
-      </li>
-      <li class="animate-switch" ng-switch-when="2">
-        <h1>Who is The Giver?</h1>
-      </li>
-      <li class="animate-switch" ng-switch-when="3">
-        <h1>Who is The Collaborator?</h1>
-      </li>
-      <li class="animate-switch" ng-switch-when="3">
-        <h1>Who is The Hoarder?</h1>
-      </li>
-      <li class="animate-switch" ng-switch-when="3">
-      <h1>Who is The Trendsetter?</h1>
-      </li>
-      <li class="animate-switch" ng-switch-when="3">
-        <h1>Who is The Copy Cat?</h1>
-      </li>
-    </ul>
-
-
-
-
-
-
-
-
+<section class="image section" layout="column" flex="100"  ng-switch on="currentCategory%5">
+  <div layout="column"  flex="5"></div>
+  <div class="swosh" layout="column" layout-align="center center" flex="40" ng-switch-when="0">
+    <img class="image-swosh" ng-src="../images/category_hipster.png">
+    <h1>Who is The Hipster? </h1>
   </div>
-
-  <div layout="column" class="swosh" layout-align="center center" flex="20">
-    <h1>Login with your Spotify profile to find out!</h1>
+  <div class="swosh" layout="column" layout-align="center center" flex="40" ng-switch-when="1">
+    <img class="image-swosh" ng-src="../images/category_superstar.png">
+    <h1>Who is The Superstar?</h1>
+  </div>
+  <div class="swosh" layout="column" layout-align="center center" flex="40" ng-switch-when="2">
+    <img class="image-swosh" ng-src="../images/category_giver.png">
+    <h1>Who is The Giver?</h1>
+  </div>
+  <!--div class="swosh" layout="column" layout-align="center center" flex="40" ng-switch-when="3">
+    <img class="image-swosh" ng-src="../images/category_collaborator.png">
+    <h1>Who is The Collaborator?</h1>
+  </div-->
+  <div class="swosh" layout="column" layout-align="center center" flex="40" ng-switch-when="4">
+    <img class="image-swosh" ng-src="../images/category_hoarder.png">
+    <h1>Who is The Hoarder?</h1>
+  </div>
+  <div class="swosh" layout="column" layout-align="center center" flex="40" ng-switch-when="5">
+    <img class="image-swosh" ng-src="../images/category_trendsetter.png">
+    <h1>Who is The Trendsetter?</h1>
+  </div>
+  <div class="swosh" layout="column" layout-align="center center" flex="40" ng-switch-when="6">
+    <img class="image-swosh" ng-src="../images/category_copycat.png">
+    <h1>Who is The Copy Cat?</h1>
+  </div>
+  <div layout="column" flex="50" layout-align="start center">
+    <h1>Login with your Spotify profile  to find out!</h1>
     <md-button class="md-raised md-primary" ng-click="login()">Login to Spotify</md-button>
   </div>
-  <div layout="row" class="swosh" layout-align="center center" flex="20">
-
-  </div>
-
-</div>
+</section>

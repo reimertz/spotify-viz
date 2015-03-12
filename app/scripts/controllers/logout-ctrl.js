@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 'use strict';
 
 angular.module('controllers.logout', [])
@@ -8,5 +9,5 @@ function ($state) {
   localStorage.removeItem('userId');
   localStorage.removeItem('spotify-token');
 
-  $state.go('splash')
+  $state.go('splash');
 }]);

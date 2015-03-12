@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 'use strict';
 
 angular.module('spotifyViz', [
@@ -18,8 +19,8 @@ angular.module('spotifyViz', [
   .config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, SpotifyProvider) {
 
   SpotifyProvider.setClientId('835d8a553e434b99b9f2314d3fe6d90d');
-  //SpotifyProvider.setRedirectUri('http://localhost:3000/callback.html');
-  SpotifyProvider.setRedirectUri('https://reimertz.github.io/spotify-viz/callback.html');
+  SpotifyProvider.setRedirectUri('http://localhost:3000/callback.html');
+  //SpotifyProvider.setRedirectUri('https://reimertz.github.io/spotify-viz/callback.html');
   SpotifyProvider.setScope('playlist-read-private user-follow-read user-library-read');
 
   $mdThemingProvider.theme('default')
@@ -62,7 +63,7 @@ angular.module('spotifyViz', [
       url: '/vizualize',
       templateUrl: 'partials/vizualize.html',
       controller: 'VizualizeCtrl',
-      params:      {'user': undefined, 'challenger': undefined},
+      params:      {'user': undefined, 'challenger': undefined, 'globalAverages': undefined},
       authenticate: true
     })
     .state('logout', {
@@ -76,14 +77,14 @@ angular.module('spotifyViz', [
 
 }).run(function($state, $rootScope) {
 
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 
-    if(!toState.authenticate && !!localStorage['userId']) {
+    if(!toState.authenticate && !!localStorage.userId) {
       event.preventDefault();
 
       $state.go('main');
     }
-    else if(toState.authenticate && !localStorage['userId']) {
+    else if(toState.authenticate && !localStorage.userId) {
       event.preventDefault();
 
       $state.go('splash');

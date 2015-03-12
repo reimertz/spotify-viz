@@ -1,28 +1,27 @@
 @mixin graph($userColor, $challengerColor, $leftBarColor, $rightBarColor) {
-    background: linear-gradient(to right, $userColor 0%, $userColor 49.5%, $challengerColor 50%, $challengerColor 100%);
+  background: linear-gradient(to right, $userColor 0%, $userColor 49.5%, $challengerColor 50%, $challengerColor 100%);
 
-    .left-bar {
-        background: $leftBarColor;
-      }
+  .left-bar {
+    background: $leftBarColor;
+  }
 
-    .right-bar {
-      background: $rightBarColor;
-    }
+  .right-bar {
+    background: $rightBarColor;
+  }
 
-    &.summary .left-bar {
-      background: $userColor;
-    }
+  .small .left-bar {
+    background: $userColor;
+  }
 
-    &.summary .right-bar {
-      background: $challengerColor;
-    }
+  .small .right-bar {
+    background: $challengerColor;
+  }
+  .small .rest {
+    background: transparent;
+  }
 }
 
-
-
-
-
-.vizualize-view {
+.section {
   .md-primary {
     padding: 10px 65px;
   }
@@ -39,13 +38,33 @@
     background: black !important;
   }
 
-  .ready{
-    background-image: url("../images/splash.jpg");
-    background-size: cover;
+  .user{
+    h1 {
+      font-family: 'Pacifico', cursive;
+    }
+   .rest{
+      background: transparent !important;
+
+    }
+  }
+  .challenger {
+    h1 {
+      font-family: 'Pacifico', cursive;
+    }
+    .rest{
+      background: transparent;
+    }
   }
 
-  .images {
+  &.ready {
     background: black;
+
+    .image {
+      background-image: url("../images/splash.jpg");
+      background-size: cover;
+      background-position-y: bottom;
+    }
+
     div {
       text-align: center;
     }
@@ -55,94 +74,6 @@
       width: 25vw;
       max-width: 200px;
     }
-
-  }
-
-  .user{
-     .rest{
-        background: transparent !important;
-    }
-    .left-bar{
-      min-width: 40px;
-    }
-  }
-  .challenger {
-    .rest{
-      background: transparent;
-    }
-    .right-bar{
-      min-width: 40px;
-    }
-  }
-
-
-
-
-  .hipster {
-    $userColor : rgb(172, 75, 149);
-    $challengerColor : rgb(165, 60, 140);
-    $leftBarColor : rgb(132, 19, 105);
-    $rightBarColor : rgb(110, 16, 88);
-
-    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
-  }
-
-  .superstar {
-    $userColor : rgb(250, 108, 94);
-    $challengerColor : rgb(250, 96, 80);
-    $leftBarColor : rgb(212, 54, 38);
-    $rightBarColor : rgb(174, 45, 31);
-
-    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
-  }
-
-  .giver {
-    $userColor : rgb(61, 177, 165);
-    $challengerColor : rgb(45, 170, 158);
-    $leftBarColor : rgb(2, 137, 124);
-    $rightBarColor : rgb(2, 122, 110);
-
-    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
-  }
-
-  .collaborator {
-    $userColor : rgb(255, 161, 59);
-    $challengerColor : rgb(255, 154, 43);
-    $leftBarColor : rgb(242, 126, 0);
-    $rightBarColor : rgb(217, 113, 0);
-
-    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
-  }
-
-  .hoarder {
-    $userColor : rgb(98, 210, 89);
-    $challengerColor : rgb(85, 206, 75);
-    $leftBarColor : rgb(46, 176, 35);
-    $rightBarColor : rgb(41, 157, 31);
-
-    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
-  }
-
-
-  .trendsetter {
-    color: white;
-    $userColor : rgb(225, 81, 134);
-    $challengerColor : rgb(223, 67, 124);
-    $leftBarColor : rgb(184, 25, 83);
-    $rightBarColor : rgb(151, 20, 68);
-
-    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
-  }
-
-
-  .copycat {
-    $userColor : rgb(59, 158, 220);
-    $challengerColor : rgb(43, 150, 217);
-    $leftBarColor : rgb(0, 116, 188);
-    $rightBarColor : rgb(0, 97, 157);
-
-    @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
-
   }
   #world {
     z-index: 1;
@@ -152,8 +83,22 @@
     display: inline;
   }
 
-  .summary {
+  &.summary {
     background: black;
+    .challenger-won,
+    .user-won {
+      background: transparent;
+    }
+
+    .user-won .challenger .right-bar,
+    .user-won .challenger .rest {
+      background: transparent !important;
+    }
+    .challenger-won .user .left-bar,
+    .challenger-won .user .rest {
+      background: transparent !important;
+    }
+
 
     &.user-won .challenger .right-bar {
       background: transparent !important;
@@ -162,10 +107,168 @@
       background: transparent !important;
     }
   }
+}
 
-  .share {
-    background: tomato;
+.average {
+  background-image: url(../images/average_bg.jpg);
+  background-size: cover;
+  img, h1 {
+    z-index: 10;
   }
+
+  #chart {
+    width: 75%;
+    z-index: 10;
+      .baseline {
+        line {
+          stroke: rgb(255, 127, 14) !important;
+        }
+        text {
+          fill: rgb(255, 127, 14);
+        }
+      }
+     .c3-axis-x text {
+      fill: white;
+    }
+    .c3-axis-x {
+     fill: none;
+    }
+
+    &.c3 path, &.c3 line {
+      fill: none;
+      stroke: #000;
+    }
+  }
+
+}
+
+.share {
+  background: tomato;
 }
 
 
+.hipster {
+  $userColor : rgb(172, 75, 149);
+  $challengerColor : rgb(165, 60, 140);
+  $leftBarColor : rgb(132, 19, 105);
+  $rightBarColor : rgb(110, 16, 88);
+
+  @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+}
+
+.superstar {
+  $userColor : rgb(250, 108, 94);
+  $challengerColor : rgb(250, 96, 80);
+  $leftBarColor : rgb(212, 54, 38);
+  $rightBarColor : rgb(174, 45, 31);
+
+  @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+}
+
+.giver {
+  $userColor : rgb(61, 177, 165);
+  $challengerColor : rgb(45, 170, 158);
+  $leftBarColor : rgb(2, 137, 124);
+  $rightBarColor : rgb(2, 122, 110);
+
+  @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+}
+
+.collaborator {
+  $userColor : rgb(255, 161, 59);
+  $challengerColor : rgb(255, 154, 43);
+  $leftBarColor : rgb(242, 126, 0);
+  $rightBarColor : rgb(217, 113, 0);
+
+  @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+}
+
+.hoarder {
+  $userColor : rgb(98, 210, 89);
+  $challengerColor : rgb(85, 206, 75);
+  $leftBarColor : rgb(46, 176, 35);
+  $rightBarColor : rgb(41, 157, 31);
+
+  @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+}
+
+
+.trendsetter {
+  color: white;
+  $userColor : rgb(225, 81, 134);
+  $challengerColor : rgb(223, 67, 124);
+  $leftBarColor : rgb(184, 25, 83);
+  $rightBarColor : rgb(151, 20, 68);
+
+  @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+}
+
+
+.copycat {
+  $userColor : rgb(59, 158, 220);
+  $challengerColor : rgb(43, 150, 217);
+  $leftBarColor : rgb(0, 116, 188);
+  $rightBarColor : rgb(0, 97, 157);
+
+  @include graph($userColor, $challengerColor, $leftBarColor, $rightBarColor);
+
+}
+
+
+
+
+.hipster {
+  h1 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 7vw;
+    line-height: 1vw;
+  }
+}
+
+.superstar {
+  h1 {
+    font-family: 'Rochester', cursive;
+    font-size: 5vw;
+    line-height: 1vw;
+  }
+}
+
+.giver {
+  h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 5vw;
+    line-height: 1vw;
+  }
+}
+
+.collaborator {
+  h1 {
+    font-family: 'Patua One', cursive;
+    font-size: 5vw;
+    line-height: 1vw;
+  }
+}
+
+.hoarder {
+  h1 {
+    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 5vw;
+    line-height: 1vw;
+  }
+}
+
+.trendsetter {
+  h1 {
+    font-family: 'Poiret One', cursive;
+    font-size: 5vw;
+    line-height: 1vw;
+  }
+}
+
+.copycat {
+  h1 {
+    font-family: 'Shadows Into Light Two', cursive;
+    font-size: 5vw;
+    line-height: 1vw;
+  }
+}

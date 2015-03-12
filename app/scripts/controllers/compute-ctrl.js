@@ -1,3 +1,5 @@
+/* jshint ignore:start */
+
 'use strict';
 
 angular.module('controllers.compute', [])
@@ -7,10 +9,11 @@ angular.module('controllers.compute', [])
   '$state',
   '$stateParams',
   '$q',
+  '$http',
   '$timeout',
   'Spotify',
   '$mdDialog',
-function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
+function ($scope, $state, $stateParams, $q, $http, $timeout, Spotify, $mdDialog) {
   if(!$stateParams.user || !$stateParams.challenger){
     return $state.go('main');
   }
@@ -20,12 +23,12 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
   $scope.user.playlists = [];
   $scope.challenger.playlists = [];
 
+
+
   $scope.status = 'Fetching Playlists..';
 
   $scope.showAlert = function(type) {
-    var message = (type == 'user')
-    ? 'It seems that you don\'t have any public playlists.. So you lost before it has even begun!'
-    : 'It seems that your friend doesn\'t have any public playlists.. Try with someone else!';
+    var message = (type === 'user') ? 'It seems that you don\'t have any public playlists.. So you lost before it has even begun!' : 'It seems that your friend doesn\'t have any public playlists.. Try with someone else!';
 
     var confirm = $mdDialog.confirm({clickOutsideToClose: false})
       .title('We couldn\'t find any playlists!')
@@ -36,7 +39,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
     $mdDialog.show(confirm).then(function() {
       return $state.go('main');
     });
-  }
+  };
 
 
   $q.all([getUserPlaylists($scope.user.id), getUserPlaylists($scope.challenger.id)]).then(function(result){
@@ -45,17 +48,20 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
     $scope.user.playlists = result[0];
     $scope.challenger.playlists = result[1];
 
-    if($scope.user.playlists.length == 0) {
+    if($scope.user.playlists.length === 0) {
       return $scope.showAlert('user');
     }
-    else if ($scope.challenger.playlists.length == 0 ) {
+    else if ($scope.challenger.playlists.length === 0 ) {
       return $scope.showAlert('challenger');
-    };
+    }
 
     $scope.status = 'Analyzing Playlist data...';
 
     promises.push(getAllPlaylistData($scope.user.id, $scope.user.playlists));
     promises.push(getAllPlaylistData($scope.challenger.id, $scope.challenger.playlists));
+
+
+
 
     $q.all(promises).then(function(result){
       $scope.status = 'Analyzing popularity data..';
@@ -64,10 +70,10 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
       angular.extend($scope.challenger, $scope.challenger, result[1]);
 
       $q.all([calculatePopularity($scope.user.playlists),calculatePopularity($scope.challenger.playlists)]).then(function(result){
-        $scope.status = 'Finalizing data...';
+        $scope.status = 'Getting international average data...';
 
-        $scope.user.popularity = (result[0]/$scope.user.totalSongs).toFixed(2);
-        $scope.challenger.popularity = (result[1]/$scope.challenger.totalSongs).toFixed(2);
+        $scope.user.popularity = parseInt((result[0]/$scope.user.totalSongs).toFixed(2));
+        $scope.challenger.popularity = parseInt((result[1]/$scope.challenger.totalSongs).toFixed(2));
 
         //No need to pass these enormous datasets since we already have the data we need for
         //the next view. :D
@@ -75,10 +81,22 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
         delete $scope.user.playlists;
         delete $scope.challenger.playlists;
 
-        $state.go('vizualize', {'user': $scope.user, 'challenger': $scope.challenger});
-      })
+        $timeout(function(){
+          $http.post('http://localhost:3001/average', {user: $scope.user, challenger:$scope.challenger}).
+          success(function(data, status, headers, config) {
+            $scope.status = 'Finalizing data...';
+            $timeout(function(){
+              $state.go('vizualize', {'user': $scope.user, 'challenger': $scope.challenger, 'globalAverages': data});
+            },1000);
+
+          }).
+          error(function(data, status, headers, config) {
+            console.log(status);
+          });
+        },1000);
+      });
     });
-  })
+  });
 
   function calculatePopularity(playlists) {
     var deferred = $q.defer();
@@ -87,9 +105,9 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
     playlists.forEach(function(playlist, index){
       playlist.tracks.items.map(function(item){
         totalPopularity += item.track.popularity;
-      })
+      });
 
-      if(playlists.length-1 == index){
+      if(playlists.length-1 === index){
         deferred.resolve(totalPopularity);
       }
     });
@@ -115,7 +133,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
     return $q.allSettled(promises).then(function(results){
       var playlists = [];
       results.forEach(function (result) {
-        if (result.state === "fulfilled") {
+        if (result.state === 'fulfilled') {
             playlists = playlists.concat(result.value.items);
         }
       });
@@ -136,9 +154,7 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
     var totalOtherSongs = 0;
 
     playlists.forEach(function(playlist, index){
-
-
-      if(playlist.owner.id == userId){
+      if(playlist.owner.id === userId){
         totalSongs += playlist.tracks.total;
         totalCollaboratives += playlist.collaborative ? 1 : 0;
         totalPublics += playlist.public ? 1 : 0;
@@ -155,10 +171,12 @@ function ($scope, $state, $stateParams, $q, $timeout, Spotify, $mdDialog) {
     return $q.allSettled(promises).then(function(results){
       var fullPlaylists = [];
       results.forEach(function (result) {
-        if (result.state === "fulfilled") {
+        console.log(result);
+        if (result.state === 'fulfilled') {
+            console.log(result.value.followers.total);
             fullPlaylists.push(result.value);
 
-          if(result.value.owner.id == userId){
+          if(result.value.owner.id === userId){
             totalPlaylistFollowers += result.value.followers.total;
           }
           else {

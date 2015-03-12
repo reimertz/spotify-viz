@@ -1,8 +1,18 @@
-.splash-view {
+.section.image {
   background-image: url("../images/splash.jpg");
   background-size: cover;
 
   .md-primary {
     padding: 10px 65px;
   }
+}
+
+img {
+  border-radius: 100px;
+  width: 25vw;
+  max-width: 200px;
+}
+
+.ng-leave {
+  display: none;
 }
